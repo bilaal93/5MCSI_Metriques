@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - Mon Super Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Reset léger */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f172a, #1d4ed8);
+            color: #0f172a;
+        }
+
+        .contact-wrapper {
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 40px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 24px;
+            padding: 32px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        @media (max-width: 800px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+        }
+
+        .contact-left {
+            color: #e5e7eb;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(96, 165, 250, 0.7);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 18px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 12px #22c55e;
+        }
+
+        h1 {
+            font-size: 32px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #60a5fa;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        .info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            font-size: 14px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        .contact-right {
+            background: rgba(15, 23, 42, 0.9);
+            border-radius: 18px;
+            padding: 20px 20px 24px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .contact-right h2 {
+            font-size: 18px;
+            color: #e5e7eb;
+            margin-bottom: 4px;
+        }
+
+        .contact-right p {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 18px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .required {
+            color: #f97316;
+            margin-left: 3px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(55, 65, 81, 0.8);
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.18s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #6b7280;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.5);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+            max-height: 220px;
+        }
+
+        .form-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .submit-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: #e5e7eb;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.6);
+            filter: brightness(1.05);
+        }
+
+        .submit-btn span {
+            font-size: 15px;
+        }
+
+        .submit-hint {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .disclaimer {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contact-wrapper">
+    <!-- Colonne gauche : texte / présentation -->
+    <section class="contact-left">
+        <div class="badge">
+            <div class="badge-dot"></div>
+            <span>Formulaire de contact</span>
+        </div>
+
+        <h1>Une idée, une question <span class="highlight">?</span></h1>
+        <p class="subtitle">
+            Laissez-moi un message ci-dessous. Je vous répondrai dès que possible.
+        </p>
+
+        <div class="info-block">
+            <div class="info-line">
+                <div class="info-icon">💡</div>
+                <span>Expliquez en quelques lignes votre besoin ou votre projet.</span>
+            </div>
+            <div class="info-line">
+                <div class="info-icon">✨</div>
+                <span>Soignez votre message, ce formulaire a été pensé pour être agréable à utiliser.</span>
+            </div>
+            <div class="info-line">
+                <div class="info-icon">🧪</div>
+                <span>Dans le cadre de l'exercice, les données ne seront pas réellement enregistrées.</span>
+            </div>
+        </div>
+
+        <p class="note">
+            💬 Astuce : n’hésitez pas à personnaliser ce texte avec votre univers (portfolio, projet étudiant, etc.).
+        </p>
+    </section>
+
+    <!-- Colonne droite : formulaire -->
+    <section class="contact-right">
+        <h2>Me laisser un message</h2>
+        <p>Renseignez vos informations ci-dessous afin que je puisse vous répondre dans les meilleures conditions.</p>
+
+        <form action="/contact/" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="prenom">Bilal<span class="required">*</span></label>
+                    <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+                </div>
+                <div class="form-group">
+                    <label for="nom">Sall<span class="required">*</span></label>
+                    <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Votre message<span class="required">*</span></label>
+                <textarea id="message" name="message" placeholder="Écrivez ici votre message..." required></textarea>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="submit-btn">
+                    <span>Envoyer le message</span> <span>📨</span>
+                </button>
+                <p class="submit-hint">
+                    En cliquant sur "Envoyer", votre message est simulé dans le cadre de l'exercice.
+                </p>
+                <p class="disclaimer">
+                    ⚠️ Les informations saisies ne sont pas enregistrées : ce formulaire est uniquement destiné à
+                    l’évaluation du design (exercice front-end).
+                </p>
+            </div>
+        </form>
+    </section>
+</div>
+
+</body>
+</html>
