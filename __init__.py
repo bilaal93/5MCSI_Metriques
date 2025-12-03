@@ -38,6 +38,27 @@ def mongraphique():
 def monhistogramme():
     return render_template("histogramme.html")
 
-@app.route("/commit/")
-def moncommit():
-    return render_template("commit.html")
+@app.route("/commits-data/")
+def commits_data():
+    url = 'https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits'
+    response = urlopen(url)
+    raw_content = response.read()
+    commits = json.loads(raw_content.decode('utf-8'))
+
+    minutes_list = []
+    for commit in commits:
+        date_string = commit.get('commit', {}).get('author', {}).get('date')
+        if date_string:
+            date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
+            minutes_list.append(date_object.minute)
+
+    counts = {i:0 for i in range(60)}
+    for m in minutes_list:
+        counts[m] += 1
+
+    results = [{'minute': k, 'commits': v} for k,v in counts.items()]
+    return jsonify(results=results)
+
+@app.route("/commits/")
+def commits():
+    return render_template("commits.html")
