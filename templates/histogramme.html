@@ -1,13 +1,9 @@
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Metrique</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([])
-                                                         
-      </head>
+  </head>
   <body>
     <div id="chart_div"></div>
     <script>
@@ -25,13 +21,14 @@
     });
     // Configurer les options du graphique en ligne
     var options = {
-      title: 'Évolution des températures de la ville de Tawarano',
-      curveType: 'function',
-      legend: { position: 'bottom' }
-    };
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-    chart.draw(dataTable, options);
-  }
+          title: 'monhistogramme',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(dataTable, options);
+      }
   // Récupération de données depuis notre API /tawarano/
   fetch('/tawarano/')
     .then(response => response.json())
